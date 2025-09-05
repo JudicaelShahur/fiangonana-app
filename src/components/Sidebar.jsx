@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaUsers, FaCalendarAlt, FaChurch, FaDonate, FaTasks, FaUserCog, FaCog, FaQuestionCircle, FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [sidebarActive, setSidebarActive] = useState(false);
@@ -27,19 +28,20 @@ export default function Sidebar() {
 
         <ul className="sidebar-menu">
           <li className="menu-title">Principal</li>
-          <li className="menu-item">
-            <a href="#" className="menu-link"><FaUsers /> Tableau de bord</a>
-          </li>
-          <li className="menu-item">
-            <a href="#" className="menu-link"><FaCalendarAlt /> Calendrier <span className="menu-badge">3</span></a>
-          </li>
+          <li className="menu-item"><Link to="/dashboard" className="menu-link"><FaChurch /> Tableau de bord</Link></li>
+          <li className="menu-item"><Link to="/statistique" className="menu-link"><FaDonate /> Statistique</Link></li>
 
           <li className="menu-title">Gestion</li>
-          <li className="menu-item"><a href="#" className="menu-link"><FaUsers /> Membres</a></li>
-          <li className="menu-item"><a href="#" className="menu-link"><FaChurch /> Paroisses</a></li>
-          <li className="menu-item"><a href="#" className="menu-link"><FaDonate /> Dons & Finance</a></li>
-          <li className="menu-item"><a href="#" className="menu-link"><FaTasks /> Activités</a></li>
-
+          <li className="menu-item"><Link to="/fiangonana" className="menu-link"><FaDonate /> Fiangonana</Link></li>
+          <li className="menu-item"><Link to="/kartie" className="menu-link"><FaChurch /> Kartie</Link></li>
+          <li className="menu-item"><Link to="/mpino" className="menu-link"><FaDonate /> Mpino</Link></li>
+          <li className="menu-item"><Link to="/mpitondra" className="menu-link"><FaDonate /> Mpitondra</Link></li>
+          <li className="menu-item"><Link to="/chefkartie" className="menu-link"><FaDonate /> Chef Kartie</Link></li>
+          <li className="menu-item"><Link to="/fahatongavana" className="menu-link"><FaDonate /> Fahatongavana</Link></li>
+          <li className="menu-item"><Link to="/chefkartie" className="menu-link"><FaDonate /> Chef Kartie</Link></li>
+          <li className="menu-item"><Link to="/Vola" className="menu-link"><FaDonate /> Vola</Link></li>
+          <li className="menu-item"><Link to="/komitie" className="menu-link"><FaDonate /> Komitie</Link></li>
+          <li className="menu-item"><Link to="/sampana" className="menu-link"><FaDonate /> Sampana</Link></li>
           <li className="menu-title">Administration</li>
           <li className="menu-item"><a href="#" className="menu-link"><FaUserCog /> Utilisateurs</a></li>
           <li className="menu-item"><a href="#" className="menu-link"><FaCog /> Paramètres</a></li>

@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Layout from './layouts/Layout';
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './routes/PrivateRoute';
 import './styles/Auth.css';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,8 +18,7 @@ function App() {
 
         {/* Routes protégées */}
         <Route element={<PrivateRoute />}>
-          <Route path="/dashboard" element={<Layout />} />
-          {/* Azonao ampiana routes hafa eto koa */}
+          <Route path="/*" element={<Layout />} />
         </Route>
       </Routes>
 

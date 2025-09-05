@@ -6,7 +6,6 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 body {
     background-color: #f5f7f9;
     color: #333;
@@ -21,7 +20,6 @@ body {
     display: flex;
     width: 100%;
     max-width: 1000px;
-    /* ✅ fluide et limité */
     min-height: 650px;
     background: white;
     border-radius: 15px;
@@ -172,7 +170,7 @@ body {
 .input-icon {
     position: absolute;
     left: 15px;
-    top: 40px;
+    top: 45px;
     color: #777;
     z-index: 1;
 }
@@ -217,10 +215,7 @@ body {
     color: #4e54c8;
     text-decoration: none;
 }
-
-
 /* Champs côte à côte */
-
 .form-row {
     display: flex;
     gap: 20px;
@@ -231,10 +226,7 @@ body {
     flex: 1;
     margin-bottom: 0;
 }
-
-
 /* Champ select */
-
 .select-wrapper {
     position: relative;
 }
@@ -258,8 +250,6 @@ select {
     -moz-appearance: none;
     background-color: white;
 }
-
-
 /* Animation changement formulaire */
 
 .login-form {
@@ -288,9 +278,7 @@ select {
     }
 }
 
-
 /* Indication force mot de passe */
-
 .password-strength {
     height: 5px;
     margin-top: 8px;
@@ -305,9 +293,7 @@ select {
     transition: width 0.3s, background 0.3s;
 }
 
-
 /* Page connexion */
-
 .remember-forgot {
     display: flex;
     justify-content: space-between;
@@ -329,24 +315,17 @@ select {
     color: #4e54c8;
     text-decoration: none;
 }
-
-
 /* Indicateurs de mot de passe */
-
 #admin-password-match,
 #user-password-match {
     height: 5px;
     margin-top: 8px;
     border-radius: 5px;
 }
-
-
 /* Affichage/masquage mot de passe */
-
 .password-input-container {
     position: relative;
 }
-
 .password-toggle {
     position: absolute;
     right: 15px;
@@ -368,11 +347,15 @@ select {
 
 
 /* Ajustement icônes password */
-
+.select-wrapper .input-icon {
+    top: 50%;
+    transform: translateY(-50%);
+}
 .password-input-container .input-icon {
     left: 15px;
     right: auto;
     z-index: 1;
+    
 }
 
 .password-input-container input {
@@ -387,10 +370,6 @@ select {
 .password-input-container+.password-strength {
     margin-top: 8px;
 }
-
-
-/* ✅ Responsive */
-
 @media (max-width: 900px) {
     .fullscreen-container {
         flex-direction: column;
@@ -407,7 +386,6 @@ select {
     .form-row {
         flex-direction: column;
         gap: 10px;
-        /* ✅ ajout pour espacement */
     }
     .welcome-text h1 {
         font-size: 2rem;
@@ -455,7 +433,6 @@ select {
         padding-right: 40px !important;
     }
 }
-
 @media (max-width: 400px) {
     .form-group input,
     .form-group select {
