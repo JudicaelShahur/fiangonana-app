@@ -5,8 +5,8 @@ import { loginUser } from "../services/authService";
 import { afficherToastErreur } from "../utils/toast";
 import { getBackendMessage } from "../utils/getBackendMessage";
 
-const useLoginForm = (etatInitial = { nomUtilisateur: "", motDePasse: "", seSouvenir: false }) => {
-  const { setUser, setToken } = useAuth();
+const useLoginForm = (etatInitial = { nomUtilisateur: "", motDePasse: "" }) => {
+  const { setUser } = useAuth();
   const [donneesFormulaire, setDonneesFormulaire] = useState(etatInitial);
   const [afficherMotDePasse, setAfficherMotDePasse] = useState(false);
   const [error, setError] = useState(null);
@@ -34,19 +34,13 @@ const useLoginForm = (etatInitial = { nomUtilisateur: "", motDePasse: "", seSouv
         nom_user: data.nomUtilisateur,
         mdp_user: data.motDePasse,
       });
-
-      if (result.success && result.results) {
-      setUser(result.results.user);
-      setToken(result.results.token);
-
-      // Stocker dans localStorage
-      localStorage.setItem("token", result.results.token);
-      localStorage.setItem("user", JSON.stringify(result.results.user));
-
-      navigate("/dashboard");
-    }
-      return result.results;
-
+      
+      if (result.success && result.user) {
+        setUser(result.user);
+        navigate("/dashboard");
+      } else {
+        console.warn("Format réponse inattendu:", result);
+      }
     } catch (err) {
       const messageErreur = getBackendMessage(err);
       setError(messageErreur);

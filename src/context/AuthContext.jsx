@@ -1,64 +1,45 @@
-// src/context/AuthContext.jsx
 import { createContext, useContext, useState, useEffect } from "react";
-import { logoutUser } from "../services/authService";
+import { fetchCurrentUser, logoutUser } from "../services/authService";
+import { getCsrfCookie } from "../api";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(true); 
-    // Récupère l'utilisateur et le token depuis le localStorage au démarrage
     useEffect(() => {
-        const savedToken = localStorage.getItem("token");
-        const savedUser = localStorage.getItem("user");
-        if (savedToken) setToken(savedToken);
-        if (savedUser) setUser(JSON.parse(savedUser));
-        setLoading(false); // vérification terminée
-    }, []);
-    // Sauvegarde dans le localStorage lorsqu'il y a un changement
-    useEffect(() => {
-        if (token) localStorage.setItem("token", token);
-        else localStorage.removeItem("token");
-
-        if (user) localStorage.setItem("user", JSON.stringify(user));
-        else localStorage.removeItem("user");
-    }, [token, user]);
-    // Déconnexion
-    const logout = async () => {
-        if (token) {
+        const loadUser = async () => {
             try {
-                await logoutUser(token);
+                // Maka CSRF cookie aloha
+                await getCsrfCookie();
+
+                // Avy eo maka ny user
+                const result = await fetchCurrentUser();
+                if (result.success && result.user) setUser(result.user);
             } catch (err) {
-                if (err.response?.status === 401) {
-                    console.warn("Token expiré ou non valide, déconnexion côté client uniquement");
-                } else {
-                    console.error("Erreur lors de la déconnexion :", err);
-                }
+                setUser(null);
+            } finally {
+                setLoading(false);
             }
+        };
+        loadUser();
+    }, []);
+
+    const logout = async () => {
+        try {
+            await logoutUser();
+        } catch (err) {
+            console.error(err);
         }
-        // Suppression côté client
         setUser(null);
-        setToken(null);
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
         navigate("/login");
     };
 
     return (
-        <AuthContext.Provider
-            value={{
-                user,
-                token,
-                loading,
-                setUser,
-                setToken,
-                logout,
-            }}
-        >
+        <AuthContext.Provider value={{ user, setUser, loading, logout }}>
             {children}
         </AuthContext.Provider>
     );
