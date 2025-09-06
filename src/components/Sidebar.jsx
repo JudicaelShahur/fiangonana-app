@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaUsers, FaCalendarAlt, FaChurch, FaDonate, FaTasks, FaUserCog, FaCog, FaQuestionCircle, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import useProfile from "../hooks/useProfile";
+import "/src/styles/SidNavBar.css";
 export default function Sidebar() {
-  const [sidebarActive, setSidebarActive] = useState(false);
+  const { user, loading } = useProfile();
+  const [sidebarActive, setSidebarActive] = useState( );
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
 
   useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < 992) setSidebarActive(true);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+      if (window.innerWidth >= 992) setSidebarActive(true);
       else setSidebarActive(false);
-    }
+    };
+
     window.addEventListener("resize", handleResize);
-    handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
 
   return (
     <>
       <aside className={`sidebar ${sidebarActive ? "active" : ""}`}>
         <div className="sidebar-header">
           <div className="sidebar-user">
-            <div className="user-avatar"><FaUserCircle /></div>
-            <div className="user-name">Jean Dupont</div>
-            <div className="user-role">Administrateur</div>
+          <div className="user-avatar"><FaUserCircle /></div>
+          <div className="user-name">{loading ? "Chargement..." : user?.nom_user || "Utilisateur"}</div>
+          <div className="user-role">{user?.role || "Role"}</div>
           </div>
         </div>
 
@@ -49,9 +54,11 @@ export default function Sidebar() {
         </ul>
       </aside>
 
-      <div className={`sidebar-toggle ${sidebarActive ? "active" : ""}`} onClick={() => setSidebarActive(!sidebarActive)}>
-        <FaBars />
-      </div>
+      {window.innerWidth < 992 && (
+        <div className={`sidebar-toggle ${sidebarActive ? "active" : ""}`} onClick={() => setSidebarActive(!sidebarActive)}>
+          <FaBars />
+        </div>
+      )}
     </>
   );
 }

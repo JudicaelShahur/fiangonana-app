@@ -38,17 +38,12 @@ const useLoginForm = (etatInitial = { nomUtilisateur: "", motDePasse: "", seSouv
       if (result.success && result.results) {
       setUser(result.results.user);
       setToken(result.results.token);
-
-      // Stocker dans localStorage
-      localStorage.setItem("token", result.results.token);
-      localStorage.setItem("user", JSON.stringify(result.results.user));
-
       navigate("/dashboard");
     }
       return result.results;
 
     } catch (err) {
-      const messageErreur = getBackendMessage(err);
+      const messageErreur = getBackendMessage(err.response?.data || err);
       setError(messageErreur);
       afficherToastErreur(messageErreur);
     }

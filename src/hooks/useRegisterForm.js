@@ -1,6 +1,6 @@
 // src/hooks/useRegisterForm.js
 import { useState } from "react";
-import { registerUser, loginUser } from "../services/authService";
+import { registerUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import { afficherToastSuccès, afficherToastErreur } from "../utils/toast"; 
 import { getBackendMessage } from "../utils/getBackendMessage";
@@ -74,15 +74,8 @@ export default function useRegisterForm() {
             // Reset formulaires
             setFormulaireAdmin({ nomUtilisateur: "", motDePasse: "", confirmerMotDePasse: "", rôle: "Admin Fiangonana" });
             setFormulaireUtilisateur({ nomUtilisateur: "", motDePasse: "", confirmerMotDePasse: "", rôle: "", église: "" });
-            // **Login automatique**
-            const loginRes = await loginUser({
-                nom_user: dataToSend.nom_user,
-                mdp_user: dataToSend.mdp_user,
-            });
-            // Stockage token
-            sessionStorage.setItem("token", loginRes.results.token); // ohatra
-            // Redirect amin’ny dashboard na page hafa
-            navigate("/dashboard"); 
+            
+            navigate("/login"); 
 
         } catch (err) {
            // Maka mivantana ilay data avy amin'ny Axios

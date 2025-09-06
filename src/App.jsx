@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import Login from './components/Auth/Login';
-import Register from './components/Auth/Register';
-import Layout from './layouts/Layout';
+import Login from './pages/Auth/Login';
+import Register from './pages/Auth/Register';
 import PrivateRoute from './routes/PrivateRoute';
 import './styles/Auth.css';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RouteFiangonana from './routes/RouteFiangonana';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
 
         {/* Routes protégées */}
         <Route element={<PrivateRoute />}>
-          <Route path="/*" element={<Layout />} />
+          <Route path="/*" element={<RouteFiangonana />} />
         </Route>
       </Routes>
 
