@@ -6,6 +6,8 @@ import useLogout from "../hooks/useLogout";
 import useMembresEnAttente from "../hooks/useMembresEnAttente";
 import useGererUser from "../hooks/useGererUser";
 import { useTheme } from "../context/ThemeContext";
+import logoflm from "../assets/flmLogo.png";
+
 export default function Navbar() {
   const [menuActive, setMenuActive] = useState(false);
   const [notifActive, setNotifActive] = useState(false);
@@ -33,7 +35,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <FaChurch />
+        <img src={logoflm} alt=""/>
         <span>Fiangonana</span>
       </div>
 
@@ -96,7 +98,7 @@ export default function Navbar() {
         </li>
         <li className="navbar-item">
           <a onClick={toggleTheme} className="theme-toggle">
-            {theme === "light" ?  <FaSun /> :<FaMoon /> }
+            {theme === "light" ? <FaMoon /> : <FaSun /> }
           </a>
         </li>
       </ul>

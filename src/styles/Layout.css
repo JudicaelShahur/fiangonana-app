@@ -1,0 +1,44 @@
+/* ===== VARIABLES ===== */
+:root {
+    --navbar-height: 70px;
+    --sidebar-width: 250px;
+    --bg-color: #f8f9fa;
+}
+
+/* ===== LAYOUT ===== */
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+}
+
+.layout-body {
+    display: flex;
+    flex: 1;
+    margin-top: var(--navbar-height);
+    overflow: hidden;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+    flex: 1;
+    min-height: calc(100vh - var(--navbar-height));
+    padding: 20px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+/* Desktop: miaraka amin'ny sidebar */
+@media (min-width: 992px) {
+    .main-content {
+        margin-left: var(--sidebar-width);
+    }
+}
+
+/* Mobile/Tablet: sidebar overlay */
+@media (max-width: 991px) {
+    .main-content {
+        margin-left: 0;
+    }
+}

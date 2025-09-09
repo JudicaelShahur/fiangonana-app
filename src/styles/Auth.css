@@ -71,10 +71,17 @@ body {
     align-items: center;
     justify-content: center;
     overflow-y: auto;
+    margin-bottom: 10px;
     min-width: 320px;
-    /* ✅ pour éviter écrasement */
-}
 
+}
+.right-panel img {
+    width: 90px;
+    height: 90px;
+    position: relative;
+ 
+ 
+}
 .church-logo {
     margin-bottom: 30px;
     text-align: center;
@@ -382,6 +389,9 @@ select {
     }
     .right-panel {
         padding: 30px;
+    }
+    .right-panel img {
+        top: -10px;
     }
     .form-row {
         flex-direction: column;
